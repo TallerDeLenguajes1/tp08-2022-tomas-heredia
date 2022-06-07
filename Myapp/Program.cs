@@ -21,18 +21,24 @@ public class program
         int contador = 1;
         foreach (string Carpeta in ListadoCarpetas)
         {
-            Console.WriteLine(Carpeta);
-            streamWriter.Write(contador + Carpeta + ", ");
-            contador ++;
+            
             foreach (string elemento in Directory.GetFiles(Carpeta))
             {
                 Console.WriteLine(elemento);
-                streamWriter.WriteLine(""+elemento + ", ");
+                
+                
+                string[] nombre = nombreYextencion(elemento); 
+                streamWriter.WriteLine(contador +", "+ nombre[0] + ", "+nombre[1]+", ");
+                contador ++;
             }
             foreach (string elementos in ListadoElementos)
             {
                 Console.WriteLine(elementos);
-                streamWriter.WriteLine(elementos + ", ");
+                
+                string[] nombre = nombreYextencion(elementos); 
+                streamWriter.WriteLine(contador +", "+ nombre[0] + ", "+nombre[1]+", ");
+                contador ++;
+                
             }
         }
 
@@ -41,6 +47,13 @@ public class program
         
     }
 
+
+    public static string[] nombreYextencion(string ruta){
+        string[] subs = ruta.Split(@"\");
+        int total = subs.Count();
+        string[] nombre = subs[total-1].Split('.'); 
+        return nombre;
+    }
 
 
     }
